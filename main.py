@@ -1,4 +1,3 @@
-from functools import total_ordering
 
 
 class CustomList(list):
@@ -20,22 +19,13 @@ class CustomList(list):
         return self.__add__(other)
 
     def __sub__(self, other):
-        res = CustomList()
-        i = 0
-        while i < len(self) and i < len(other):
-            res.append(self[i] - other[i])
-            i += 1
-        while i < len(self):
-            res.append(self[i])
-            i += 1
-        while i < len(other):
-            res.append(-other[i])
-            i += 1
-        return res
+        return self.__add__(-CustomList(other))
     
     def __rsub__(self, other):
-        res = self.__sub__(other)
-        return CustomList(map(lambda a: -a, res))
+        return (-self).__add__(other)
+
+    def __neg__(self):
+        return CustomList(map(lambda a: -a, self))
 
     def __gt__(self, other):
         return sum(self) > sum(other)
@@ -48,3 +38,7 @@ class CustomList(list):
 
     def __le__(self, other):
         return sum(self) <= sum(other)
+
+    def __eq__(self, other):
+        return sum(self) == sum(other)
+

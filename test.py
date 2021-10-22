@@ -30,7 +30,7 @@ class TestCustomList(unittest.TestCase):
         self.assertGreaterEqual(l2, l3)
         self.assertLess(l2, l1)
         self.assertLessEqual(l3, l2)
-        self.assertNotEqual(l2, l3)
+        self.assertEqual(l2, l3)
 
 
 if __name__ == '__main__':
